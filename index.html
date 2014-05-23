@@ -1,0 +1,25 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>PTT推文抽獎</title>
+
+	<link href="bootstrap.min.css" rel="stylesheet">
+	<link href="index.css" rel="stylesheet">
+
+	<script src="jquery.min.js"></script>
+	<script src="bootstrap.min.js"></script>
+	<script src="index.js"></script>
+</head>
+
+<body>
+<p>PTT推文抽獎</p>
+<textarea id="pushcontent" cols="40" rows="5">輸入PTT推文內容</textarea>
+<p><input type=button value="分析ID" onclick="parseIDs()"></p>
+<p>一共有 <span id="idCount">0</span> 人參與死鬥(?)：</p>
+<textarea id="idStr" cols="40" rows="5" readonly>分析後的ID會在這裡</textarea>
+<p><input type="checkbox" id="nocheat">本人承諾搖號過程中有任何作弊行為我就是孫子</p>
+<p><input type=button value="搖吧！" onclick="roll()"></p>
+<p id="result"></p>
+</body>
