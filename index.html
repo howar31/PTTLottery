@@ -3,6 +3,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+
 	<title>PTT推文抽獎</title>
 
 	<link href="bootstrap.min.css" rel="stylesheet">
@@ -14,12 +15,44 @@
 </head>
 
 <body>
-<p>PTT推文抽獎</p>
-<textarea id="pushcontent" cols="40" rows="5">輸入PTT推文內容</textarea>
-<p><input type=button value="分析ID" onclick="parseIDs()"></p>
-<p>一共有 <span id="idCount">0</span> 人參與死鬥(?)：</p>
-<textarea id="idStr" cols="40" rows="5" readonly>分析後的ID會在這裡</textarea>
-<p><input type="checkbox" id="nocheat">本人承諾搖號過程中有任何作弊行為我就是孫子</p>
-<p><input type=button value="搖吧！" onclick="roll()"></p>
-<p id="result"></p>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">PTT推文抽獎</a>
+		</div>
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#">首頁</a></li>
+				<li><a href="#about">關於本網頁</a></li>
+			</ul>
+		</div><!--/.nav-collapse -->
+	</div>
+</div>
+
+<div class="container">
+	<h1>PTT推文抽獎</h1>
+
+	<textarea id="pushcontent" cols="40" rows="5">輸入PTT推文內容</textarea>
+	<p><input type=button value="分析ID" onclick="parseIDs()"></p>
+	<p>一共有 <span id="idCount">0</span> 人參與死鬥(?)：</p>
+	<textarea id="idStr" cols="40" rows="5" readonly>分析後的ID會在這裡</textarea>
+	<p><input type="checkbox" id="nocheat">本人承諾搖號過程中有任何作弊行為我就是孫子</p>
+	<p><input type=button value="搖吧！" onclick="roll()"></p>
+	<p id="result"></p>
+</div><!-- /.container -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-8779590-9', 'howar31.github.io');
+  ga('send', 'pageview');
+</script>
 </body>
