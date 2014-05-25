@@ -35,4 +35,6 @@ body {
 #pushinfo {
 	display: none;
 	line-height: 34px;
+	border-radius: 4px;
+	padding: 0px 10px;
 }
