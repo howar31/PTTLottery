@@ -3,8 +3,12 @@ body {
 }
 
 .row {
-	margin-top: 5px;
-	margin-bottom: 5px;
+	margin: 5px -5px 5px -5px;
+}
+
+.row div {
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 .row-block {
@@ -12,12 +16,23 @@ body {
 	margin-bottom: 15px;
 }
 
+#pushimport,
+#pushurl,
+#pushroll {
+	width: 100%;
+}
+
 #pushcontent {
 	min-width: 100%;
 	max-width: 100%;
-	min-height: 104px;
+	min-height: 112px;
 }
 
 #idCount {
 	font-weight: bold;
+}
+
+#pushinfo {
+	display: none;
+	line-height: 34px;
 }

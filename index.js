@@ -1,4 +1,5 @@
 var idList = [];
+var infodisplaying = false;
 
 function parseIDs() {
 	//parse ID
@@ -27,11 +28,11 @@ console.log(result);
 function roll() {
     document.getElementById('result').innerHTML = '';
     if(!document.getElementById('nocheat').checked) {
-        alert('不要作弊啦QAQ');
+        showinfo('不要作弊啦QAQ',"danger");
         return;
     }
     if(idList.length==0) {
-        alert('沒有半個人想抽哭哭');
+        showinfo('沒有半個人想抽哭哭',"warning");
         return;
     }
     var winner = idList[randomFloor(0, idList.length-1)];
@@ -50,3 +51,26 @@ function unique(list) {
   });
   return result;
 }
+
+function showinfo(info, type) {
+	if (infodisplaying) return true;
+	infodisplaying = true;
+
+	if (type != "primary" && type != "success" && type != "info" && type != "warning" && type != "danger") {
+		type = "info";
+	}
+	$("#pushinfo").addClass("text-"+type+" bg-"+type).html(info).fadeIn(500).delay(3000).fadeOut(1000).queue(function() {
+		$(this).removeClass("text-"+type+" bg-"+type);
+		$(this).dequeue();
+		infodisplaying = false;
+	});
+}
+
+$( document ).ready(function() {
+	$( document ).on("keyup", "#pushcontent", function() {
+		parseIDs();
+	});
+	$( document ).on("click", "#pushroll", function() {
+		roll();
+	});
+});
