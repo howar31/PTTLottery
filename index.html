@@ -24,7 +24,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">PTT推文抽獎</a>
+			<a class="navbar-brand" href="#">PTT推樂透</a>
 		</div>
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
@@ -36,15 +36,40 @@
 </div>
 
 <div class="container">
-	<h1>PTT推文抽獎</h1>
+	<div class="page-header" id="header">
+		<h1 id="header-title">PTT 推樂透</h1>
+		<p class="lead" id="header-subtitle">批踢踢實業坊 鄉民推文隨機抽獎程式</p>
+	</div>
 
-	<textarea id="pushcontent" cols="40" rows="5">輸入PTT推文內容</textarea>
-	<p><input type=button value="分析ID" onclick="parseIDs()"></p>
-	<p>一共有 <span id="idCount">0</span> 人參與死鬥(?)：</p>
-	<textarea id="idStr" cols="40" rows="5" readonly>分析後的ID會在這裡</textarea>
-	<p><input type="checkbox" id="nocheat">本人承諾搖號過程中有任何作弊行為我就是孫子</p>
-	<p><input type=button value="搖吧！" onclick="roll()"></p>
-	<p id="result"></p>
+	<div class="row-block" id="data-input">
+	<div class="row">
+		<div class="col-xs-12"><textarea id="pushcontent" placeholder="請貼上PTT推文內容"></textarea></div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12"><input type="button" value="分析ID" onclick="parseIDs()"></div>
+	</div>
+	</div><!-- #data-input -->
+
+	<div class="row-block" id="data-output">
+	<div class="row" id="idStr">
+	</div>
+	<div class="row">
+		<div class="col-xs-12">共計 <span id="idCount">0</span> 人參與</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12"><input type="checkbox" id="nocheat">本人承諾開獎過程中絕無任何作弊行為，一切正常使用本程式公平公正開獎。</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12"><input type="button" value="開獎！" onclick="roll()"></div>
+	</div>
+	</div><!-- #data-output -->
+
+	<div class="row-block" id="data-result">
+	<div class="row">
+		<div class="col-xs-12"><span id="result"></div>
+	</div>
+	</div><!-- #data-result -->
+
 </div><!-- /.container -->
 
 <script>

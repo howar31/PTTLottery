@@ -1,25 +1,27 @@
 var idList = [];
 
 function parseIDs() {
-    //parse ID
-    var regex = /[推→] ([A-Za-z0-9]+):.*[\s\S]/g;
-    var content = document.getElementById('pushcontent').value;
-    var result;
-    idList = [];
-    while(result = regex.exec(content)) {
-        idList.push(result[1]);
-    }
-    idList = unique(idList);
-    
-    //update ID count
-    document.getElementById('idCount').innerHTML = idList.length;
-    
-    //update ID List
-    var idString = '';
-    for (var i in idList) {
-      idString += idList[i] + ' ';
-    }
-    document.getElementById('idStr').innerHTML = idString;
+	//parse ID
+	var pushtype = '推→';
+	var regex = new RegExp('([' + pushtype + ']) ([A-Za-z0-9]+):(.*[^\\s])[\\s]+([0-9]+/[0-9]+)[\\s]+([0-9]+:[0-9]+)', 'g');
+	var content = document.getElementById('pushcontent').value;
+	var result;
+	idList = [];
+	while(result = regex.exec(content)) {
+console.log(result);
+		idList.push(result[2]);
+	}
+	idList = unique(idList);
+
+	//update ID count
+	document.getElementById('idCount').innerHTML = idList.length;
+
+	//update ID List
+	var idString = '';
+	for (var i in idList) {
+		idString += '<div class="col-xs-3">' + idList[i] + '</div>';
+	}
+	document.getElementById('idStr').innerHTML = idString;
 }
 
 function roll() {

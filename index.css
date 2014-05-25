@@ -1,3 +1,23 @@
 body {
 	padding-top: 50px;
 }
+
+.row {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.row-block {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+#pushcontent {
+	min-width: 100%;
+	max-width: 100%;
+	min-height: 104px;
+}
+
+#idCount {
+	font-weight: bold;
+}
