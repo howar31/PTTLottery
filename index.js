@@ -84,6 +84,7 @@ function webimport(url) {
 		error:function(xhr,status,error){
 			showinfo("網頁內容匯入過程發生錯誤！", "danger");
 			$("#pushcontent").val("");
+			$("#result").html("");
 			parseIDs();
 		}      
 	});
@@ -106,12 +107,14 @@ function showinfo(info, type) {
 $( document ).ready(function() {
 	$( document ).on("keyup", "#pushcontent", function() {
 		parseIDs();
+		$("#result").html("");
 	});
 	$( document ).on("click", "#pushroll", function() {
 		roll();
 	});
 	$( document ).on("click", "#pushimport", function() {
 		$("#pushcontent").val("匯入中...");
+		parseIDs();
 		var weburl = $("#pushurl").val();
 		if (!weburl.match("^.*://")) {
 			weburl = "http://"+weburl;
