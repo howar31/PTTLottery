@@ -1,6 +1,18 @@
 var idList = [];
 var infodisplaying = false;
 
+function randomFloor(min,max) {
+    return Math.floor(Math.random()*(max-min+1)+min);
+}
+
+function unique(list) {
+  var result = [];
+  $.each(list, function(i, e) {
+    if ($.inArray(e, result) == -1) result.push(e);
+  });
+  return result;
+}
+
 function parseIDs() {
 	//parse ID
 	var pushtype = "推→";
@@ -9,7 +21,6 @@ function parseIDs() {
 	var result;
 	idList = [];
 	while(result = regex.exec(content)) {
-console.log(result);
 		idList.push(result[2]);
 	}
 	idList = unique(idList);
@@ -41,16 +52,20 @@ function roll() {
 	showinfo("開獎啦！","success");
 }
 
-function randomFloor(min,max) {
-    return Math.floor(Math.random()*(max-min+1)+min);
-}
-
-function unique(list) {
-  var result = [];
-  $.each(list, function(i, e) {
-    if ($.inArray(e, result) == -1) result.push(e);
-  });
-  return result;
+function webimport(url) {
+	$.ajax({
+		url: "http://www.ptt.cc/bbs/Steam/M.1400528184.A.85E.html",   
+		type: "GET",
+		dataType: "text/html",
+		success:function(result){
+			console.log("Success");
+			console.log(result);
+			$("#result").html(result.responseText);
+		},
+		error:function(xhr,status,error){
+			console.log("ERROR");
+		}      
+	});
 }
 
 function showinfo(info, type) {
@@ -73,5 +88,8 @@ $( document ).ready(function() {
 	});
 	$( document ).on("click", "#pushroll", function() {
 		roll();
+	});
+	$( document ).on("click", "#pushimport", function() {
+		webimport($("#pushurl").val());
 	});
 });
