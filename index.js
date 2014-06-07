@@ -59,15 +59,15 @@ function webimport(url) {
 		type: "GET",
 		dataType: "text",
 		success:function(result){
-			$("#pushcontent").val("");
+//console.log(result);
 			var webresult = result.responseText;
-console.log(webresult);
+//console.log(webresult);
 
 			var plaintext = "";
 			var regex = new RegExp("<div class=\"push\">\n[\\s]*<span.*\">(.*)</span>[\\s]*\n[\\s]*<span.*\">(.*)</span>[\\s]*\n[\\s]*<span.*\">:(.*)</span>[\\s]*\n[\\s]*<span.*\">([0-9]+/[0-9]+) ([0-9]+:[0-9]+)</span></div>", "g");
 			while(rst = regex.exec(webresult)) {
 //console.log(rst);
-console.log("MATCH: "+rst);
+//console.log("MATCH: "+rst);
 				plaintext += rst[1]+" "+rst[2]+":"+rst[3]+" "+rst[4]+" "+rst[5]+"\n";
 			}
 //console.log(templist);
@@ -83,6 +83,8 @@ console.log("MATCH: "+rst);
 		},
 		error:function(xhr,status,error){
 			showinfo("網頁內容匯入過程發生錯誤！", "danger");
+			$("#pushcontent").val("");
+			parseIDs();
 		}      
 	});
 }
@@ -109,6 +111,12 @@ $( document ).ready(function() {
 		roll();
 	});
 	$( document ).on("click", "#pushimport", function() {
-		webimport($("#pushurl").val());
+		$("#pushcontent").val("匯入中...");
+		var weburl = $("#pushurl").val();
+		if (!weburl.match("^.*://")) {
+			weburl = "http://"+weburl;
+			$("#pushurl").val(weburl);
+		}
+		webimport(weburl);
 	});
 });
