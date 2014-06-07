@@ -115,6 +115,8 @@ $( document ).ready(function() {
 	$( document ).on("click", "#pushimport", function() {
 		$("#pushcontent").val("匯入中...");
 		parseIDs();
+		$("#result").html("");
+
 		var weburl = $("#pushurl").val();
 		if (!weburl.match("^.*://")) {
 			weburl = "http://"+weburl;
