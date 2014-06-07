@@ -2,26 +2,27 @@ var idList = [];
 var infodisplaying = false;
 
 function randomFloor(min,max) {
-    return Math.floor(Math.random()*(max-min+1)+min);
+	return Math.floor(Math.random()*(max-min+1)+min);
 }
 
 function unique(list) {
-  var result = [];
-  $.each(list, function(i, e) {
-    if ($.inArray(e, result) == -1) result.push(e);
-  });
-  return result;
+	var result = [];
+	$.each(list, function(i, e) {
+		if ($.inArray(e, result) == -1) result.push(e);
+	});
+	return result;
 }
 
 function parseIDs() {
 	//parse ID
 	var pushtype = "推→";
-	var regex = new RegExp("([" + pushtype + "]) ([A-Za-z0-9]+):(.*[^\\s])[\\s]+([0-9]+/[0-9]+)[\\s]+([0-9]+:[0-9]+)", "g");
+	var regex = new RegExp("([" + pushtype + "]) ([A-Za-z0-9]+)[\\s]*:(.*[^\\s])[\\s]+([0-9]+/[0-9]+)[\\s]+([0-9]+:[0-9]+)", "g");
 	var content = document.getElementById("pushcontent").value;
 	var result;
 	idList = [];
 	while(result = regex.exec(content)) {
 		idList.push(result[2]);
+//console.log(result);
 	}
 	idList = unique(idList);
 
@@ -54,16 +55,34 @@ function roll() {
 
 function webimport(url) {
 	$.ajax({
-		url: "http://www.ptt.cc/bbs/Steam/M.1400528184.A.85E.html",   
+		url: url, 
 		type: "GET",
-		dataType: "text/html",
+		dataType: "text",
 		success:function(result){
-			console.log("Success");
-			console.log(result);
-			$("#result").html(result.responseText);
+			$("#pushcontent").val("");
+			var webresult = result.responseText;
+console.log(webresult);
+
+			var plaintext = "";
+			var regex = new RegExp("<div class=\"push\">\n[\\s]*<span.*\">(.*)</span>[\\s]*\n[\\s]*<span.*\">(.*)</span>[\\s]*\n[\\s]*<span.*\">:(.*)</span>[\\s]*\n[\\s]*<span.*\">([0-9]+/[0-9]+) ([0-9]+:[0-9]+)</span></div>", "g");
+			while(rst = regex.exec(webresult)) {
+//console.log(rst);
+console.log("MATCH: "+rst);
+				plaintext += rst[1]+" "+rst[2]+":"+rst[3]+" "+rst[4]+" "+rst[5]+"\n";
+			}
+//console.log(templist);
+
+//			var div = document.createElement("div");
+//			div.innerHTML = webresult;
+//			var plaintext = div.textContent || div.innerText || "";
+//console.log(plaintext);
+
+			$("#pushcontent").val(plaintext);
+			parseIDs();
+			showinfo("網頁內容匯入完成", "success");
 		},
 		error:function(xhr,status,error){
-			console.log("ERROR");
+			showinfo("網頁內容匯入過程發生錯誤！", "danger");
 		}      
 	});
 }
