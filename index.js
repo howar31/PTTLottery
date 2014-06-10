@@ -158,6 +158,9 @@ $( document ).ready(function() {
 	$( document ).on("click", ".sum_title", function() {
 		$(this).siblings(".sum_list").toggle("fast", "linear");
 	});
+	$( document ).on("click", "#pushurl", function() {
+		$(this).select();
+	});
 	$( document ).on("keyup click", "#pushcontent, .chk_pushtype", function() {
 		parseIDs();
 		$("#result").html("");
