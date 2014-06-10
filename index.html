@@ -68,12 +68,29 @@
 	<div class="row">
 		<div class="col-sm-12"><h2>統計</h2></div>
 	</div>
+	<!-- 推文分析 -->
 	<div class="row">
-	<blockquote>
-		<div class="row"><div class="col-sm-12" id="sum_id"><p>共計 <span id="idCount">0</span> 人參與</p></div></div>
-		<footer><div class="row" id="sum_id_list"></div></footer>
+	<blockquote class="sum">
+		<div class="row sum_title"><div class="col-sm-12" id="sum_origin"><p>推文分析</p></div></div>
+		<footer class="sum_list"><div class="row" id="sum_origin_list">
+			<div class="col-md-1">樓數</div>
+			<div class="col-md-1">類型</div>
+			<div class="col-md-2">ID</div>
+			<div class="col-md-6">內容</div>
+			<div class="col-md-1">日期</div>
+			<div class="col-md-1">時間</div>
+			<span id="sum_origin_list_insert"></span>
+		</div></footer>
 	</blockquote>
 	</div>
+	<!-- 人數計算 -->
+	<div class="row">
+	<blockquote class="sum">
+		<div class="row sum_title"><div class="col-sm-12" id="sum_id"><p>共計 <span id="idCount">0</span> 人參與</p></div></div>
+		<footer class="sum_list"><div class="row" id="sum_id_list"></div></footer>
+	</blockquote>
+	</div>
+	<!-- 確認 -->
 	<div class="row">
 		<div class="col-sm-12"><input type="checkbox" id="nocheat" title="確認資料設定都完成，點選此鎖定資料並同意條約">本人承諾開獎過程中絕無任何作弊行為，一切正常使用本程式公平公正開獎。</div>
 	</div>

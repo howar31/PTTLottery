@@ -1,4 +1,5 @@
 var idList = [];
+var pushList = [];
 var infodisplaying = false;
 
 function randomFloor(min,max) {
@@ -22,8 +23,8 @@ function parseIDs() {
 	var result;
 	idList = [];
 	while(result = regex.exec(content)) {
-		idList.push(result[2]);
 //console.log(result);
+		idList.push(result[2]);
 	}
 	idList = unique(idList);
 
@@ -31,11 +32,12 @@ function parseIDs() {
 	document.getElementById("idCount").innerHTML = idList.length;
 
 	//update ID List
-	var idString = "";
+	var tmpString = "";
 	for (var i in idList) {
-		idString += "<div class=\"col-xs-3\">" + idList[i] + "</div>";
+		tmpString += "<div class=\"col-xs-3\">" + idList[i] + "</div>";
 	}
-	document.getElementById("sum_id_list").innerHTML = idString;
+	document.getElementById("sum_id_list").innerHTML = tmpString;
+
 }
 
 function roll() {
@@ -63,23 +65,43 @@ function webimport(url) {
 //console.log(result);
 			var webresult = result.responseText;
 //console.log(webresult);
-
+			pushList = [];
+			var i = 0;
 			var plaintext = "";
 			var regex = new RegExp("<div class=\"push\">\n[\\s]*<span.*\">(.*)</span>[\\s]*\n[\\s]*<span.*\">(.*)</span>[\\s]*\n[\\s]*<span.*\">:(.*)</span>[\\s]*\n[\\s]*<span.*\">([0-9]+/[0-9]+) ([0-9]+:[0-9]+)</span></div>", "g");
 			while(rst = regex.exec(webresult)) {
-//console.log(rst);
+console.log(rst);
 //console.log("MATCH: "+rst);
 				plaintext += rst[1]+" "+rst[2]+":"+rst[3]+" "+rst[4]+" "+rst[5]+"\n";
+				pushList.push({
+					floor: i+1,
+					type: rst[1],
+					id: rst[2],
+					content: rst[3],
+					date: rst[4],
+					time: rst[5]
+				});
+				i++;
 			}
+console.log(pushList);
 //console.log(templist);
-
-//			var div = document.createElement("div");
-//			div.innerHTML = webresult;
-//			var plaintext = div.textContent || div.innerText || "";
 //console.log(plaintext);
 
 			$("#pushcontent").val(plaintext);
 			parseIDs();
+
+			var tmpString = "";
+			for (var i in pushList) {
+				tmpString += 
+					"<div class=\"col-md-1\">" + pushList[i].floor + "</div>" +
+					"<div class=\"col-md-1\">" + pushList[i].type + "</div>" +
+					"<div class=\"col-md-2\">" + pushList[i].id + "</div>" +
+					"<div class=\"col-md-6\">" + pushList[i].content + "</div>" +
+					"<div class=\"col-md-1\">" + pushList[i].date + "</div>" +
+					"<div class=\"col-md-1\">" + pushList[i].time + "</div>";
+			}
+			document.getElementById("sum_origin_list_insert").innerHTML = tmpString;
+
 			showinfo("網頁內容匯入完成", "success");
 		},
 		error:function(xhr,status,error){
@@ -133,8 +155,8 @@ $( document ).ready(function() {
 		}
 		webimport(weburl);
 	});
-	$( document ).on("click", "#sum_id", function() {
-		$("#sum_id_list").toggle("fast", "linear");
+	$( document ).on("click", ".sum_title", function() {
+		$(this).siblings(".sum_list").toggle("fast", "linear");
 	});
 	$( document ).on("keyup click", "#pushcontent, .chk_pushtype", function() {
 		parseIDs();

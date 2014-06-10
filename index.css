@@ -28,11 +28,11 @@ body {
 	min-height: 112px;
 }
 
-#sum_id {
+.sum_title {
 	cursor: pointer;
 }
 
-#sum_id_list {
+.sum_list {
 	display: none;
 }
 
