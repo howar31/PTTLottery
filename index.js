@@ -15,7 +15,8 @@ function unique(list) {
 
 function parseIDs() {
 	//parse ID
-	var pushtype = "推→";
+	var pushtype = $(".chk_pushtype:checked").map(function() {return this.value;}).get().join("");
+//console.log(pushtype);
 	var regex = new RegExp("([" + pushtype + "]) ([A-Za-z0-9]+)[\\s]*:(.*[^\\s])[\\s]+([0-9]+/[0-9]+)[\\s]+([0-9]+:[0-9]+)", "g");
 	var content = document.getElementById("pushcontent").value;
 	var result;
@@ -105,13 +106,6 @@ function showinfo(info, type) {
 }
 
 $( document ).ready(function() {
-	$( document ).on("keyup", "#pushcontent", function() {
-		parseIDs();
-		$("#result").html("");
-	});
-	$( document ).on("click", "#pushroll", function() {
-		roll();
-	});
 	$( document ).on("click", "#pushimport", function() {
 		$("#pushcontent").val("匯入中...");
 		parseIDs();
@@ -123,5 +117,12 @@ $( document ).ready(function() {
 			$("#pushurl").val(weburl);
 		}
 		webimport(weburl);
+	});
+	$( document ).on("keyup click", "#pushcontent, .chk_pushtype", function() {
+		parseIDs();
+		$("#result").html("");
+	});
+	$( document ).on("click", "#pushroll", function() {
+		roll();
 	});
 });

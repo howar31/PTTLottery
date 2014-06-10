@@ -44,6 +44,18 @@
 
 	<div class="row-block" id="data-input">
 	<div class="row">
+		<div class="col-sm-12"><h2>設定</h2></div>
+	</div>
+	<div class="form-group">
+		<span class="help-block">選擇要採計的推文類型</span>
+		<div class="checkbox-inline"><label><input type="checkbox" value="推" id="chk_push" class="chk_pushtype">推</label></div>
+		<div class="checkbox-inline"><label><input type="checkbox" value="→" id="chk_arrow" class="chk_pushtype">→</label></div>
+		<div class="checkbox-inline"><label><input type="checkbox" value="噓" id="chk_shh" class="chk_pushtype">噓</label></div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12"><h2>輸入</h2></div>
+	</div>
+	<div class="row">
 		<div class="col-sm-2"><button type="button" class="btn btn-primary" id="pushimport">匯入網頁</button></div>
 		<div class="col-sm-10"><input type="text" class="form-control" id="pushurl" placeholder="請輸入PTT文章網址，自動匯入推文內容"/></div>
 	</div>
@@ -53,6 +65,9 @@
 	</div><!-- #data-input -->
 
 	<div class="row-block" id="data-output">
+	<div class="row">
+		<div class="col-sm-12"><h2>統計</h2></div>
+	</div>
 	<div class="row" id="idStr">
 	</div>
 	<div class="row">
