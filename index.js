@@ -14,17 +14,16 @@ function unique(list) {
 	return result;
 }
 
-function parseIDs() {
+function parseAll() {
+	var rst;
+	var content = document.getElementById("pushcontent").value;
+
 	//parse ID
 	var pushtype = $(".chk_pushtype:checked").map(function() {return this.value;}).get().join("");
-//console.log(pushtype);
 	var regex = new RegExp("([" + pushtype + "]) ([A-Za-z0-9]+)[\\s]*:(.*[^\\s])[\\s]+([0-9]+/[0-9]+)[\\s]+([0-9]+:[0-9]+)", "g");
-	var content = document.getElementById("pushcontent").value;
-	var result;
 	idList = [];
-	while(result = regex.exec(content)) {
-//console.log(result);
-		idList.push(result[2]);
+	while(rst = regex.exec(content)) {
+		idList.push(rst[2]);
 	}
 	idList = unique(idList);
 
@@ -38,6 +37,33 @@ function parseIDs() {
 	}
 	document.getElementById("sum_id_list").innerHTML = tmpString;
 
+	//parse Analytics
+	var regex = new RegExp("([推→噓]) ([A-Za-z0-9]+)[\\s]*:(.*[^\\s])[\\s]+([0-9]+/[0-9]+)[\\s]+([0-9]+:[0-9]+)", "g");
+	pushList = [];
+	var i = 0;
+	while(rst = regex.exec(content)) {
+		pushList.push({
+			floor: i+1,
+			type: rst[1],
+			id: rst[2],
+			content: rst[3],
+			date: rst[4],
+			time: rst[5]
+		});
+		i++;
+	}
+	
+	var tmpString = "";
+	for (var i in pushList) {
+		tmpString += 
+			"<div class=\"col-md-1\">" + pushList[i].floor + "</div>" +
+			"<div class=\"col-md-1\">" + pushList[i].type + "</div>" +
+			"<div class=\"col-md-2\">" + pushList[i].id + "</div>" +
+			"<div class=\"col-md-6\">" + pushList[i].content + "</div>" +
+			"<div class=\"col-md-1\">" + pushList[i].date + "</div>" +
+			"<div class=\"col-md-1\">" + pushList[i].time + "</div>";
+	}
+	document.getElementById("sum_origin_list_insert").innerHTML = tmpString;
 }
 
 function roll() {
@@ -62,45 +88,14 @@ function webimport(url) {
 		type: "GET",
 		dataType: "text",
 		success:function(result){
-//console.log(result);
 			var webresult = result.responseText;
-//console.log(webresult);
-			pushList = [];
-			var i = 0;
 			var plaintext = "";
 			var regex = new RegExp("<div class=\"push\">\n[\\s]*<span.*\">(.*)</span>[\\s]*\n[\\s]*<span.*\">(.*)</span>[\\s]*\n[\\s]*<span.*\">:(.*)</span>[\\s]*\n[\\s]*<span.*\">([0-9]+/[0-9]+) ([0-9]+:[0-9]+)</span></div>", "g");
 			while(rst = regex.exec(webresult)) {
-//console.log(rst);
-//console.log("MATCH: "+rst);
 				plaintext += rst[1]+" "+rst[2]+":"+rst[3]+" "+rst[4]+" "+rst[5]+"\n";
-				pushList.push({
-					floor: i+1,
-					type: rst[1],
-					id: rst[2],
-					content: rst[3],
-					date: rst[4],
-					time: rst[5]
-				});
-				i++;
 			}
-//console.log(pushList);
-//console.log(templist);
-//console.log(plaintext);
-
 			$("#pushcontent").val(plaintext);
-			parseIDs();
-
-			var tmpString = "";
-			for (var i in pushList) {
-				tmpString += 
-					"<div class=\"col-md-1\">" + pushList[i].floor + "</div>" +
-					"<div class=\"col-md-1\">" + pushList[i].type + "</div>" +
-					"<div class=\"col-md-2\">" + pushList[i].id + "</div>" +
-					"<div class=\"col-md-6\">" + pushList[i].content + "</div>" +
-					"<div class=\"col-md-1\">" + pushList[i].date + "</div>" +
-					"<div class=\"col-md-1\">" + pushList[i].time + "</div>";
-			}
-			document.getElementById("sum_origin_list_insert").innerHTML = tmpString;
+			parseAll();
 
 			showinfo("網頁內容匯入完成", "success");
 		},
@@ -108,7 +103,7 @@ function webimport(url) {
 			showinfo("網頁內容匯入過程發生錯誤！", "danger");
 			$("#pushcontent").val("");
 			$("#result").html("");
-			parseIDs();
+			parseAll();
 		}      
 	});
 }
@@ -128,7 +123,6 @@ function showinfo(info, type) {
 }
 
 function lockdown(lock) {
-//console.log(lock);
 	if (lock) {
 		$(".chk_pushtype").attr("disabled", true);
 		$("#pushimport").attr("disabled", true);
@@ -145,7 +139,7 @@ function lockdown(lock) {
 $( document ).ready(function() {
 	$( document ).on("click", "#pushimport", function() {
 		$("#pushcontent").val("匯入中...");
-		parseIDs();
+		parseAll();
 		$("#result").html("");
 
 		var weburl = $("#pushurl").val();
@@ -162,7 +156,7 @@ $( document ).ready(function() {
 		$(this).select();
 	});
 	$( document ).on("keyup click", "#pushcontent, .chk_pushtype", function() {
-		parseIDs();
+		parseAll();
 		$("#result").html("");
 	});
 	$( document ).on("click", "#pushroll", function() {
