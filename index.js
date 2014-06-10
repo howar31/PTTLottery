@@ -70,7 +70,7 @@ function webimport(url) {
 			var plaintext = "";
 			var regex = new RegExp("<div class=\"push\">\n[\\s]*<span.*\">(.*)</span>[\\s]*\n[\\s]*<span.*\">(.*)</span>[\\s]*\n[\\s]*<span.*\">:(.*)</span>[\\s]*\n[\\s]*<span.*\">([0-9]+/[0-9]+) ([0-9]+:[0-9]+)</span></div>", "g");
 			while(rst = regex.exec(webresult)) {
-console.log(rst);
+//console.log(rst);
 //console.log("MATCH: "+rst);
 				plaintext += rst[1]+" "+rst[2]+":"+rst[3]+" "+rst[4]+" "+rst[5]+"\n";
 				pushList.push({
@@ -83,7 +83,7 @@ console.log(rst);
 				});
 				i++;
 			}
-console.log(pushList);
+//console.log(pushList);
 //console.log(templist);
 //console.log(plaintext);
 
@@ -128,7 +128,7 @@ function showinfo(info, type) {
 }
 
 function lockdown(lock) {
-console.log(lock);
+//console.log(lock);
 	if (lock) {
 		$(".chk_pushtype").attr("disabled", true);
 		$("#pushimport").attr("disabled", true);

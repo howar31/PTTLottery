@@ -36,6 +36,10 @@ body {
 	display: none;
 }
 
+#sum_origin_list > div {
+	font-weight: bold;
+}
+
 #idCount {
 	font-weight: bold;
 }
