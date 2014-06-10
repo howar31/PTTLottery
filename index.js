@@ -105,6 +105,21 @@ function showinfo(info, type) {
 	});
 }
 
+function lockdown(lock) {
+console.log(lock);
+	if (lock) {
+		$(".chk_pushtype").attr("disabled", true);
+		$("#pushimport").attr("disabled", true);
+		$("#pushurl").attr("disabled", true);
+		$("#pushcontent").attr("disabled", true);
+	} else {
+		$(".chk_pushtype").removeAttr("disabled");
+		$("#pushimport").removeAttr("disabled");
+		$("#pushurl").removeAttr("disabled");
+		$("#pushcontent").removeAttr("disabled");
+	}
+}
+
 $( document ).ready(function() {
 	$( document ).on("click", "#pushimport", function() {
 		$("#pushcontent").val("匯入中...");
@@ -124,5 +139,8 @@ $( document ).ready(function() {
 	});
 	$( document ).on("click", "#pushroll", function() {
 		roll();
+	});
+	$( document ).on("click", "#nocheat", function() {
+		lockdown(this.checked);
 	});
 });
