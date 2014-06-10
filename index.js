@@ -35,7 +35,7 @@ function parseIDs() {
 	for (var i in idList) {
 		idString += "<div class=\"col-xs-3\">" + idList[i] + "</div>";
 	}
-	document.getElementById("idStr").innerHTML = idString;
+	document.getElementById("sum_id_list").innerHTML = idString;
 }
 
 function roll() {
@@ -132,6 +132,9 @@ $( document ).ready(function() {
 			$("#pushurl").val(weburl);
 		}
 		webimport(weburl);
+	});
+	$( document ).on("click", "#sum_id", function() {
+		$("#sum_id_list").toggle("fast", "linear");
 	});
 	$( document ).on("keyup click", "#pushcontent, .chk_pushtype", function() {
 		parseIDs();

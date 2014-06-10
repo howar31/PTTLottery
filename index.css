@@ -28,6 +28,14 @@ body {
 	min-height: 112px;
 }
 
+#sum_id {
+	cursor: pointer;
+}
+
+#sum_id_list {
+	display: none;
+}
+
 #idCount {
 	font-weight: bold;
 }
