@@ -1,6 +1,6 @@
-var idList = [];
 var pushList = [];	//All content list
 var QA = [];		//Qualified ID index list based on filter settings
+var QAID = [];	//Qualified ID list
 var infodisplaying = false;
 
 function randomFloor(min,max) {
@@ -54,7 +54,7 @@ function parseContent() {
 
 function qualification() {
 	QA = [];
-	idList = [];
+	QAID = [];
 
 	//pick qualified ID up based on filter settings
 	//type filtering
@@ -65,16 +65,16 @@ function qualification() {
 
 	//process all qualified ID
 	for (var i in QA) {
-		idList.push(pushList[QA[i]].id);
+		QAID.push(pushList[QA[i]].id);
 	}
 	//update ID count
-	idList = unique(idList);
-	document.getElementById("idCount").innerHTML = idList.length;
+	QAID = unique(QAID);
+	document.getElementById("idCount").innerHTML = QAID.length;
 
 	//update ID List
 	var tmpString = "";
-	for (var i in idList) {
-		tmpString += "<div class=\"col-xs-3\">" + idList[i] + "</div>";
+	for (var i in QAID) {
+		tmpString += "<div class=\"col-xs-3\">" + QAID[i] + "</div>";
 	}
 	document.getElementById("sum_id_list").innerHTML = tmpString;
 }
@@ -85,11 +85,17 @@ function roll() {
 		showinfo("不要作弊啦QAQ","danger");
 		return;
 	}
-	if(idList.length==0) {
+	if(QAID.length==0) {
 		showinfo("沒有半個人想抽哭哭","warning");
 		return;
 	}
-	var winner = idList[randomFloor(0, idList.length-1)];
+
+	//lockdown the roll button
+	$("#nocheat").attr("disabled", true);
+	$("#pushroll").attr("disabled", true);
+
+	//get a random winner
+	var winner = QAID[randomFloor(0, QAID.length-1)];
 	var congrats = "恭喜 <b>" + winner + " </b>獲得大獎！"
 	document.getElementById("result").innerHTML = congrats;
 	showinfo("開獎啦！","success");

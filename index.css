@@ -2,6 +2,10 @@ body {
 	padding-top: 50px;
 }
 
+label {
+	cursor: pointer;
+}
+
 .row {
 	margin: 5px -5px 5px -5px;
 }
