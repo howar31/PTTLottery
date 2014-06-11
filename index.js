@@ -3,8 +3,23 @@ var QAList = [];	//Qualified ID index list based on filter settings
 var QAID = [];		//Qualified ID list
 var infodisplaying = false;
 
-function randomFloor(min,max) {
-	return Math.floor(Math.random()*(max-min+1)+min);
+function randomFloor(min, max) {
+	return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function timeCompare (Aa, Ab, Ba, Bb) {
+	//if A > B return 1
+	//if A = B return 0
+	//if A < B return -1
+	if (Aa > Ba) {
+		return 1;
+	} else if (Aa == Ba) {
+		if (Ab > Bb) return 1;
+		if (Ab == Bb) return 0;
+		if (Ab < Bb) return -1;
+	} else if (Aa < Ba) {
+		return -1;
+	}
 }
 
 function unique(list) {
@@ -188,6 +203,7 @@ function lockdown(lock) {
 }
 
 function setOptions(sel, min, max) {
+	$(sel).find("option").remove();
 	for (var i = min; i <= max; i++) {
 		var j = (i < 10)?"0"+i:i;
 		var o = new Option(j, j);
@@ -207,6 +223,23 @@ $( document ).ready(function() {
 	setOptions("#sel_filter_start_time_m", 0, 59);
 	setOptions("#sel_filter_end_time_h", 0, 23);
 	setOptions("#sel_filter_end_time_m", 0, 59);
+
+	//dynamic change day options accroding to month selects
+	$( document ).on("change", "#sel_filter_start_date_m, #sel_filter_end_date_m", function() {
+		var str = $(this).prop("id");
+		str = "#" + str.substring(0, str.length - 1) + "d";
+		switch ($(this).val()) {
+			case "01": case "03": case "05": case "07": case "08": case "10": case "12":
+				setOptions(str, 1, 31);
+				break;
+			case "04": case "06": case "09": case "11":
+				setOptions(str, 1, 30);
+				break;
+			case "02":
+				setOptions(str, 1, 29);
+				break;
+		}
+	});
 
 	//webimport
 	$( document ).on("click", "#pushimport", function() {
