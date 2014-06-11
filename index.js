@@ -200,10 +200,14 @@ function setOptions(sel, min, max) {
 $( document ).ready(function() {
 	//initialization
 	//set optiosn for selects
-	setOptions("#sel_filter_date_m", 1, 12);
-	setOptions("#sel_filter_date_d", 1, 31);
-	setOptions("#sel_filter_time_h", 0, 23);
-	setOptions("#sel_filter_time_m", 0, 59);
+	setOptions("#sel_filter_start_date_m", 1, 12);
+	setOptions("#sel_filter_start_date_d", 1, 31);
+	setOptions("#sel_filter_end_date_m", 1, 12);
+	setOptions("#sel_filter_end_date_d", 1, 31);
+	setOptions("#sel_filter_start_time_h", 0, 23);
+	setOptions("#sel_filter_start_time_m", 0, 59);
+	setOptions("#sel_filter_end_time_h", 0, 23);
+	setOptions("#sel_filter_end_time_m", 0, 59);
 
 	//webimport
 	$( document ).on("click", "#pushimport", function() {
@@ -241,10 +245,11 @@ $( document ).ready(function() {
 	});
 	//toggle sub-settings
 	$( document ).on("click", ".filter", function() {
+		$(this).parent("label").parent(".checkbox").next(".filter_block").toggle("fast", "linear");
 		if (this.checked) {
-			$(this).parent().parent().next().find(".filter_sub").removeAttr("disabled");
+			$(this).parent("label").parent(".checkbox").next(".filter_block").find(".filter_sub").removeAttr("disabled");
 		} else {
-			$(this).parent().parent().next().find(".filter_sub").attr("disabled", true);
+			$(this).parent("label").parent(".checkbox").next(".filter_block").find(".filter_sub").attr("disabled", true);
 		}
 	});
 });

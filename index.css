@@ -12,6 +12,10 @@ blockquote {
 	margin-bottom: 0px;
 }
 
+.filter_block {
+	display: none;
+}
+
 .row {
 	margin: 5px -5px 5px -5px;
 }
