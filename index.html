@@ -42,13 +42,51 @@
 		<p class="lead" id="header-subtitle">批踢踢實業坊 鄉民推文隨機抽獎程式</p>
 	</div>
 
-	<div class="row-block" id="data-input">
-	<div class="form-group">
-		<span class="help-block">選擇要採計的推文類型</span>
-		<div class="checkbox-inline"><label><input type="checkbox" value="推" id="chk_push" class="chk_pushtype">推</label></div>
-		<div class="checkbox-inline"><label><input type="checkbox" value="→" id="chk_arrow" class="chk_pushtype">→</label></div>
-		<div class="checkbox-inline"><label><input type="checkbox" value="噓" id="chk_shh" class="chk_pushtype">噓</label></div>
+	<div class="row-block" id="data-filter">
+	<!-- 推文類型過濾 -->
+	<span class="help-block">選擇要採計的推文類型</span>
+	<label class="checkbox-inline"><input type="checkbox" value="推" id="chk_push" class="chk_pushtype">推</label>
+	<label class="checkbox-inline"><input type="checkbox" value="→" id="chk_arrow" class="chk_pushtype">→</label>
+	<label class="checkbox-inline"><input type="checkbox" value="噓" id="chk_shh" class="chk_pushtype">噓</label>
+	<!-- 推文內容過濾 -->
+	<div class="checkbox">
+		<label><input type="checkbox" id="chk_filter_content">過濾推文內容</label>
 	</div>
+	<div class="form-group">
+		<label class="sr-only" for="text_filter_content">推文內容過濾</label>
+		<input type="text" class="form-control" id="text_filter_content" placeholder="推文內容需要包含的文字">
+	</div>
+	<!-- 推文日期過濾 -->
+	<div class="checkbox">
+		<label><input type="checkbox" id="chk_filter_date">過濾推文日期</label>
+	</div>
+	<div class="row">
+		<div class="col-sm-1"><select class="form-control input-sm" id="sel_filter_date_m"></select></div>
+		<div class="col-sm-1">月</div>
+		<div class="col-sm-1"><select class="form-control input-sm" id="sel_filter_date_d"></select></div>
+		<div class="col-sm-1">日</div>
+	</div>
+	<!-- 推文時間過濾 -->
+	<div class="checkbox">
+		<label><input type="checkbox" id="chk_filter_time">過濾推文時間</label>
+	</div>
+	<div class="row">
+		<div class="col-sm-1"><select class="form-control input-sm" id="sel_filter_time_h"></select></div>
+		<div class="col-sm-1">時</div>
+		<div class="col-sm-1"><select class="form-control input-sm" id="sel_filter_time_m"></select></div>
+		<div class="col-sm-1">分</div>
+	</div>
+	<!-- 推文ID過濾 -->
+	<div class="checkbox">
+		<label><input type="checkbox" id="chk_filter_id">過濾推文ID</label>
+	</div>
+	<div class="form-group">
+		<label class="sr-only" for="text_filter_id">推文ID過濾</label>
+		<input type="text" class="form-control" id="text_filter_id" title="要「排除」在名單之外的ID，以「,」分隔" placeholder="請輸入要「排除」在名單之外的ID，以「,」分隔">
+	</div>
+	</div><!-- #data-filter -->
+
+	<div class="row-block" id="data-input">
 	<div class="row">
 		<div class="col-sm-2"><button type="button" class="btn btn-primary" id="pushimport">匯入網頁</button></div>
 		<div class="col-sm-10"><input type="text" class="form-control" id="pushurl" placeholder="請輸入PTT文章網址，自動匯入推文內容"/></div>
@@ -56,9 +94,7 @@
 	<div class="row">
 		<div class="col-sm-12"><textarea class="form-control" id="pushcontent" placeholder="或手動貼上PTT推文內容"></textarea></div>
 	</div>
-	</div><!-- #data-input -->
 
-	<div class="row-block" id="data-output">
 	<!-- 推文分析 -->
 	<div class="row">
 	<blockquote class="sum">
@@ -81,17 +117,16 @@
 		<footer class="sum_list"><div class="row" id="sum_id_list"></div></footer>
 	</blockquote>
 	</div>
+	</div><!-- #data-input -->
+
+	<div class="row-block" id="data-result">
 	<!-- 確認 -->
-	<div class="form_group">
-	<div class="checkbox-inline"><label><input type="checkbox" id="nocheat" title="確認資料設定都完成，點選此鎖定資料並同意條約">本人承諾開獎過程中絕無任何作弊行為，一切正常使用本程式公平公正開獎。</label></div>
-	</div>
+	<div class="checkbox"><label><input type="checkbox" id="nocheat" title="確認資料設定都完成，點選此鎖定資料並同意條約">本人承諾開獎過程中絕無任何作弊行為，一切正常使用本程式公平公正開獎。</label></div>
 	<div class="row">
 		<div class="col-sm-2"><button type="button" class="btn btn-primary" id="pushroll">開獎！</button></div>
 		<div class="col-sm-10"><div id="pushinfo"></div></div>
 	</div>
-	</div><!-- #data-output -->
 
-	<div class="row-block" id="data-result">
 	<div class="row">
 		<div class="col-sm-12"><span id="result"></div>
 	</div>

@@ -1,5 +1,5 @@
-var pushList = [];	//All content list
-var QA = [];		//Qualified ID index list based on filter settings
+var rawList = [];	//All content list
+var QAList = [];		//Qualified ID index list based on filter settings
 var QAID = [];	//Qualified ID list
 var infodisplaying = false;
 
@@ -21,10 +21,10 @@ function parseContent() {
 
 	//parse Analytics
 	var regex = new RegExp("([推→噓]) ([A-Za-z0-9]+)[\\s]*:(.*[^\\s])[\\s]+([0-9]+/[0-9]+)[\\s]+([0-9]+:[0-9]+)", "g");
-	pushList = [];
+	rawList = [];
 	var i = 0;
 	while(rst = regex.exec(content)) {
-		pushList.push({
+		rawList.push({
 			floor: i+1,
 			type: rst[1],
 			id: rst[2],
@@ -37,14 +37,14 @@ function parseContent() {
 
 	//update Analytics List
 	var tmpString = "";
-	for (var i in pushList) {
+	for (var i in rawList) {
 		tmpString += 
-			"<div class=\"col-md-1\">" + pushList[i].floor + "</div>" +
-			"<div class=\"col-md-1\">" + pushList[i].type + "</div>" +
-			"<div class=\"col-md-2\">" + pushList[i].id + "</div>" +
-			"<div class=\"col-md-6\">" + pushList[i].content + "</div>" +
-			"<div class=\"col-md-1\">" + pushList[i].date + "</div>" +
-			"<div class=\"col-md-1\">" + pushList[i].time + "</div>";
+			"<div class=\"col-md-1\">" + rawList[i].floor + "</div>" +
+			"<div class=\"col-md-1\">" + rawList[i].type + "</div>" +
+			"<div class=\"col-md-2\">" + rawList[i].id + "</div>" +
+			"<div class=\"col-md-6\">" + rawList[i].content + "</div>" +
+			"<div class=\"col-md-1\">" + rawList[i].date + "</div>" +
+			"<div class=\"col-md-1\">" + rawList[i].time + "</div>";
 	}
 	document.getElementById("sum_origin_list_insert").innerHTML = tmpString;
 
@@ -53,19 +53,25 @@ function parseContent() {
 }
 
 function qualification() {
-	QA = [];
+	QAList = [];
 	QAID = [];
 
 	//pick qualified ID up based on filter settings
-	//type filtering
+	//type filtering, this one is necessary, no opt-out
 	var pushtype = get_setting_type();
-	for (var i in pushList) {
-		if (pushtype.search(pushList[i].type) >= 0) QA.push(i);
+	for (var i in rawList) {
+		if (pushtype.search(rawList[i].type) >= 0) QAList.push(i);
 	}
 
+	//content filtering, optional
+
+	//time filtering, optional
+
+	//id filitering, optional
+
 	//process all qualified ID
-	for (var i in QA) {
-		QAID.push(pushList[QA[i]].id);
+	for (var i in QAList) {
+		QAID.push(rawList[QAList[i]].id);
 	}
 	//update ID count
 	QAID = unique(QAID);
@@ -159,6 +165,15 @@ function lockdown(lock) {
 	}
 }
 
+function setOptions(sel, min, max) {
+	for (var i = min; i <= max; i++) {
+		var j = (i < 10)?"0"+i:i;
+		var o = new Option(j, j);
+		$(o).html(j);
+		$(sel).append(o);
+	}
+}
+
 $( document ).ready(function() {
 	$( document ).on("click", "#pushimport", function() {
 		$("#pushcontent").val("匯入中...");
@@ -188,4 +203,9 @@ $( document ).ready(function() {
 	$( document ).on("click", "#nocheat", function() {
 		lockdown(this.checked);
 	});
+
+	setOptions("#sel_filter_date_m", 1, 12);
+	setOptions("#sel_filter_date_d", 1, 31);
+	setOptions("#sel_filter_time_h", 0, 23);
+	setOptions("#sel_filter_time_m", 0, 59);
 });
