@@ -20,7 +20,7 @@ function parseContent() {
 	var content = document.getElementById("pushcontent").value;
 
 	//parse Analytics
-	var regex = new RegExp("([推→噓]) ([A-Za-z0-9]+)[\\s]*:(.*[^\\s])[\\s]+([0-9]+/[0-9]+)[\\s]+([0-9]+:[0-9]+)", "g");
+	var regex = new RegExp("([推→噓]) ([A-Za-z0-9]+)[\\s]*:(.*)[\\s]+([0-9]+/[0-9]+)[\\s]+([0-9]+:[0-9]+)", "g");
 	rawList = [];
 	var i = 0;
 	while(rst = regex.exec(content)) {
@@ -46,7 +46,10 @@ function parseContent() {
 			"<div class=\"col-md-1\">" + rawList[i].date + "</div>" +
 			"<div class=\"col-md-1\">" + rawList[i].time + "</div>";
 	}
-	document.getElementById("sum_origin_list_insert").innerHTML = tmpString;
+	document.getElementById("sum_push_list_insert").innerHTML = tmpString;
+
+	//update push count
+	document.getElementById("pushCount").innerHTML = rawList.length;
 
 	//parse qualified
 	qualification();
@@ -58,7 +61,7 @@ function qualification() {
 
 	//pick qualified ID up based on filter settings
 	//type filtering, this one is necessary, no opt-out
-	var pushtype = get_setting_type();
+	var pushtype = $(".chk_pushtype:checked").map(function() {return this.value;}).get().join("");
 	for (var i in rawList) {
 		if (pushtype.search(rawList[i].type) >= 0) QAList.push(i);
 	}
@@ -160,10 +163,6 @@ function showinfo(info, type) {
 		$(this).dequeue();
 		infodisplaying = false;
 	});
-}
-
-function get_setting_type() {
-	return $(".chk_pushtype:checked").map(function() {return this.value;}).get().join("");
 }
 
 function lockdown(lock) {
