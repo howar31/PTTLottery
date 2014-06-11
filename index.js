@@ -1,5 +1,6 @@
 var idList = [];
-var pushList = [];
+var pushList = [];	//All content list
+var QA = [];		//Qualified ID index list based on filter settings
 var infodisplaying = false;
 
 function randomFloor(min,max) {
@@ -14,28 +15,9 @@ function unique(list) {
 	return result;
 }
 
-function parseAll() {
+function parseContent() {
 	var rst;
 	var content = document.getElementById("pushcontent").value;
-
-	//parse ID
-	var pushtype = $(".chk_pushtype:checked").map(function() {return this.value;}).get().join("");
-	var regex = new RegExp("([" + pushtype + "]) ([A-Za-z0-9]+)[\\s]*:(.*[^\\s])[\\s]+([0-9]+/[0-9]+)[\\s]+([0-9]+:[0-9]+)", "g");
-	idList = [];
-	while(rst = regex.exec(content)) {
-		idList.push(rst[2]);
-	}
-	idList = unique(idList);
-
-	//update ID count
-	document.getElementById("idCount").innerHTML = idList.length;
-
-	//update ID List
-	var tmpString = "";
-	for (var i in idList) {
-		tmpString += "<div class=\"col-xs-3\">" + idList[i] + "</div>";
-	}
-	document.getElementById("sum_id_list").innerHTML = tmpString;
 
 	//parse Analytics
 	var regex = new RegExp("([推→噓]) ([A-Za-z0-9]+)[\\s]*:(.*[^\\s])[\\s]+([0-9]+/[0-9]+)[\\s]+([0-9]+:[0-9]+)", "g");
@@ -52,7 +34,8 @@ function parseAll() {
 		});
 		i++;
 	}
-	
+
+	//update Analytics List
 	var tmpString = "";
 	for (var i in pushList) {
 		tmpString += 
@@ -64,6 +47,36 @@ function parseAll() {
 			"<div class=\"col-md-1\">" + pushList[i].time + "</div>";
 	}
 	document.getElementById("sum_origin_list_insert").innerHTML = tmpString;
+
+	//parse qualified
+	qualification();
+}
+
+function qualification() {
+	QA = [];
+	idList = [];
+
+	//pick qualified ID up based on filter settings
+	//type filtering
+	var pushtype = get_setting_type();
+	for (var i in pushList) {
+		if (pushtype.search(pushList[i].type) >= 0) QA.push(i);
+	}
+
+	//process all qualified ID
+	for (var i in QA) {
+		idList.push(pushList[QA[i]].id);
+	}
+	//update ID count
+	idList = unique(idList);
+	document.getElementById("idCount").innerHTML = idList.length;
+
+	//update ID List
+	var tmpString = "";
+	for (var i in idList) {
+		tmpString += "<div class=\"col-xs-3\">" + idList[i] + "</div>";
+	}
+	document.getElementById("sum_id_list").innerHTML = tmpString;
 }
 
 function roll() {
@@ -95,7 +108,7 @@ function webimport(url) {
 				plaintext += rst[1]+" "+rst[2]+":"+rst[3]+" "+rst[4]+" "+rst[5]+"\n";
 			}
 			$("#pushcontent").val(plaintext);
-			parseAll();
+			parseContent();
 
 			showinfo("網頁內容匯入完成", "success");
 		},
@@ -103,7 +116,7 @@ function webimport(url) {
 			showinfo("網頁內容匯入過程發生錯誤！", "danger");
 			$("#pushcontent").val("");
 			$("#result").html("");
-			parseAll();
+			parseContent();
 		}      
 	});
 }
@@ -120,6 +133,10 @@ function showinfo(info, type) {
 		$(this).dequeue();
 		infodisplaying = false;
 	});
+}
+
+function get_setting_type() {
+	return $(".chk_pushtype:checked").map(function() {return this.value;}).get().join("");
 }
 
 function lockdown(lock) {
@@ -139,7 +156,7 @@ function lockdown(lock) {
 $( document ).ready(function() {
 	$( document ).on("click", "#pushimport", function() {
 		$("#pushcontent").val("匯入中...");
-		parseAll();
+		parseContent();
 		$("#result").html("");
 
 		var weburl = $("#pushurl").val();
@@ -156,7 +173,7 @@ $( document ).ready(function() {
 		$(this).select();
 	});
 	$( document ).on("keyup click", "#pushcontent, .chk_pushtype", function() {
-		parseAll();
+		parseContent();
 		$("#result").html("");
 	});
 	$( document ).on("click", "#pushroll", function() {
