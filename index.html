@@ -52,46 +52,46 @@
 	</blockquote>
 	<!-- 推文內容過濾 -->
 	<div class="checkbox">
-		<label><input type="checkbox" id="chk_filter_content">過濾推文內容</label>
+		<label><input type="checkbox" class="filter" id="chk_filter_content">過濾推文內容</label>
 	</div>
 	<blockquote>
 	<div class="form-group">
 		<label class="sr-only" for="text_filter_content">推文內容過濾</label>
-		<input type="text" class="form-control" id="text_filter_content" placeholder="推文內容需要包含的文字">
+		<input type="text" class="form-control filter_sub" id="text_filter_content" placeholder="推文內容需要包含的文字" disabled>
 	</div>
 	</blockquote>
 	<!-- 推文日期過濾 -->
 	<div class="checkbox">
-		<label><input type="checkbox" id="chk_filter_date">過濾推文日期</label>
+		<label><input type="checkbox" class="filter" id="chk_filter_date">過濾推文日期</label>
 	</div>
 	<blockquote>
 	<div class="row">
-		<div class="col-sm-1"><select class="form-control input-sm" id="sel_filter_date_m"></select></div>
+		<div class="col-sm-1"><select class="form-control input-sm filter_sub" id="sel_filter_date_m" disabled></select></div>
 		<div class="col-sm-1">月</div>
-		<div class="col-sm-1"><select class="form-control input-sm" id="sel_filter_date_d"></select></div>
+		<div class="col-sm-1"><select class="form-control input-sm filter_sub" id="sel_filter_date_d" disabled></select></div>
 		<div class="col-sm-1">日</div>
 	</div>
 	</blockquote>
 	<!-- 推文時間過濾 -->
 	<div class="checkbox">
-		<label><input type="checkbox" id="chk_filter_time">過濾推文時間</label>
+		<label><input type="checkbox" class="filter" id="chk_filter_time">過濾推文時間</label>
 	</div>
 	<blockquote>
 	<div class="row">
-		<div class="col-sm-1"><select class="form-control input-sm" id="sel_filter_time_h"></select></div>
+		<div class="col-sm-1"><select class="form-control input-sm filter_sub" id="sel_filter_time_h" disabled></select></div>
 		<div class="col-sm-1">時</div>
-		<div class="col-sm-1"><select class="form-control input-sm" id="sel_filter_time_m"></select></div>
+		<div class="col-sm-1"><select class="form-control input-sm filter_sub" id="sel_filter_time_m" disabled></select></div>
 		<div class="col-sm-1">分</div>
 	</div>
 	</blockquote>
 	<!-- 推文ID過濾 -->
 	<div class="checkbox">
-		<label><input type="checkbox" id="chk_filter_id">過濾推文ID</label>
+		<label><input type="checkbox" class="filter" id="chk_filter_id">過濾推文ID</label>
 	</div>
 	<blockquote>
 	<div class="form-group">
 		<label class="sr-only" for="text_filter_id">推文ID過濾</label>
-		<input type="text" class="form-control" id="text_filter_id" title="要「排除」在名單之外的ID，以「,」分隔" placeholder="請輸入要「排除」在名單之外的ID，以「,」分隔">
+		<input type="text" class="form-control filter_sub" id="text_filter_id" title="要「排除」在名單之外的ID，以「,」分隔" placeholder="請輸入要「排除」在名單之外的ID，以「,」分隔" disabled>
 	</div>
 	</blockquote>
 	</div><!-- #data-filter -->

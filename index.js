@@ -1,6 +1,6 @@
 var rawList = [];	//All content list
-var QAList = [];		//Qualified ID index list based on filter settings
-var QAID = [];	//Qualified ID list
+var QAList = [];	//Qualified ID index list based on filter settings
+var QAID = [];		//Qualified ID list
 var infodisplaying = false;
 
 function randomFloor(min,max) {
@@ -157,11 +157,19 @@ function lockdown(lock) {
 		$("#pushimport").attr("disabled", true);
 		$("#pushurl").attr("disabled", true);
 		$("#pushcontent").attr("disabled", true);
+		$("#chk_filter_content").attr("disabled", true);
+		$("#chk_filter_date").attr("disabled", true);
+		$("#chk_filter_time").attr("disabled", true);
+		$("#chk_filter_id").attr("disabled", true);
 	} else {
 		$(".chk_pushtype").removeAttr("disabled");
 		$("#pushimport").removeAttr("disabled");
 		$("#pushurl").removeAttr("disabled");
 		$("#pushcontent").removeAttr("disabled");
+		$("#chk_filter_content").removeAttr("disabled");
+		$("#chk_filter_date").removeAttr("disabled");
+		$("#chk_filter_time").removeAttr("disabled");
+		$("#chk_filter_id").removeAttr("disabled");
 	}
 }
 
@@ -175,6 +183,14 @@ function setOptions(sel, min, max) {
 }
 
 $( document ).ready(function() {
+	//initialization
+	//set optiosn for selects
+	setOptions("#sel_filter_date_m", 1, 12);
+	setOptions("#sel_filter_date_d", 1, 31);
+	setOptions("#sel_filter_time_h", 0, 23);
+	setOptions("#sel_filter_time_m", 0, 59);
+
+	//webimport
 	$( document ).on("click", "#pushimport", function() {
 		$("#pushcontent").val("匯入中...");
 		parseContent();
@@ -187,25 +203,33 @@ $( document ).ready(function() {
 		}
 		webimport(weburl);
 	});
+	//toggle summary collapse
 	$( document ).on("click", ".sum_title", function() {
 		$(this).siblings(".sum_list").toggle("fast", "linear");
 	});
+	//auto select url while click
 	$( document ).on("click", "#pushurl", function() {
 		$(this).select();
 	});
+	//update summary while changing input or settings
 	$( document ).on("keyup click", "#pushcontent, .chk_pushtype", function() {
 		parseContent();
 		$("#result").html("");
 	});
-	$( document ).on("click", "#pushroll", function() {
-		roll();
-	});
+	//lockdown the settings and input before rolling
 	$( document ).on("click", "#nocheat", function() {
 		lockdown(this.checked);
 	});
-
-	setOptions("#sel_filter_date_m", 1, 12);
-	setOptions("#sel_filter_date_d", 1, 31);
-	setOptions("#sel_filter_time_h", 0, 23);
-	setOptions("#sel_filter_time_m", 0, 59);
+	//rock n roll!
+	$( document ).on("click", "#pushroll", function() {
+		roll();
+	});
+	//toggle sub-settings
+	$( document ).on("click", ".filter", function() {
+		if (this.checked) {
+			$(this).parent().parent().next().find(".filter_sub").removeAttr("disabled");
+		} else {
+			$(this).parent().parent().next().find(".filter_sub").attr("disabled", true);
+		}
+	});
 });
