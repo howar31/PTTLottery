@@ -64,10 +64,25 @@ function qualification() {
 	}
 
 	//content filtering, optional
+	if ($("#chk_filter_content").prop("checked")) {
+		var tmpList = QAList;
+		QAList = [];
+		for (var i in tmpList) {
+			if (rawList[tmpList[i]].content.search($("#text_filter_content").val()) >= 0) QAList.push(tmpList[i]);
+		}
+	}
+
+	//date filtering, optional
+	if ($("#chk_filter_date").prop("checked")) {
+	}
 
 	//time filtering, optional
+	if ($("#chk_filter_time").prop("checked")) {
+	}
 
 	//id filitering, optional
+	if ($("#chk_filter_id").prop("checked")) {
+	}
 
 	//process all qualified ID
 	for (var i in QAList) {
@@ -212,7 +227,7 @@ $( document ).ready(function() {
 		$(this).select();
 	});
 	//update summary while changing input or settings
-	$( document ).on("keyup click", "#pushcontent, .chk_pushtype", function() {
+	$( document ).on("keyup click", ".instantupdate", function() {
 		parseContent();
 		$("#result").html("");
 	});
