@@ -45,45 +45,55 @@
 	<div class="row-block" id="data-filter">
 	<!-- 推文類型過濾 -->
 	<span class="help-block">選擇要採計的推文類型</span>
+	<blockquote>
 	<label class="checkbox-inline"><input type="checkbox" value="推" id="chk_push" class="chk_pushtype">推</label>
 	<label class="checkbox-inline"><input type="checkbox" value="→" id="chk_arrow" class="chk_pushtype">→</label>
 	<label class="checkbox-inline"><input type="checkbox" value="噓" id="chk_shh" class="chk_pushtype">噓</label>
+	</blockquote>
 	<!-- 推文內容過濾 -->
 	<div class="checkbox">
 		<label><input type="checkbox" id="chk_filter_content">過濾推文內容</label>
 	</div>
+	<blockquote>
 	<div class="form-group">
 		<label class="sr-only" for="text_filter_content">推文內容過濾</label>
 		<input type="text" class="form-control" id="text_filter_content" placeholder="推文內容需要包含的文字">
 	</div>
+	</blockquote>
 	<!-- 推文日期過濾 -->
 	<div class="checkbox">
 		<label><input type="checkbox" id="chk_filter_date">過濾推文日期</label>
 	</div>
+	<blockquote>
 	<div class="row">
 		<div class="col-sm-1"><select class="form-control input-sm" id="sel_filter_date_m"></select></div>
 		<div class="col-sm-1">月</div>
 		<div class="col-sm-1"><select class="form-control input-sm" id="sel_filter_date_d"></select></div>
 		<div class="col-sm-1">日</div>
 	</div>
+	</blockquote>
 	<!-- 推文時間過濾 -->
 	<div class="checkbox">
 		<label><input type="checkbox" id="chk_filter_time">過濾推文時間</label>
 	</div>
+	<blockquote>
 	<div class="row">
 		<div class="col-sm-1"><select class="form-control input-sm" id="sel_filter_time_h"></select></div>
 		<div class="col-sm-1">時</div>
 		<div class="col-sm-1"><select class="form-control input-sm" id="sel_filter_time_m"></select></div>
 		<div class="col-sm-1">分</div>
 	</div>
+	</blockquote>
 	<!-- 推文ID過濾 -->
 	<div class="checkbox">
 		<label><input type="checkbox" id="chk_filter_id">過濾推文ID</label>
 	</div>
+	<blockquote>
 	<div class="form-group">
 		<label class="sr-only" for="text_filter_id">推文ID過濾</label>
 		<input type="text" class="form-control" id="text_filter_id" title="要「排除」在名單之外的ID，以「,」分隔" placeholder="請輸入要「排除」在名單之外的ID，以「,」分隔">
 	</div>
+	</blockquote>
 	</div><!-- #data-filter -->
 
 	<div class="row-block" id="data-input">
