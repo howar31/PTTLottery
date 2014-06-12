@@ -99,7 +99,7 @@ function qualification() {
 	//type filtering, this one is necessary, no opt-out
 	var pushtype = $(".chk_pushtype:checked").map(function() {return this.value;}).get().join("");
 	for (var i in rawList) {
-		if (pushtype.search(rawList[i].type) >= 0) QAList.push(i);
+		if (pushtype.indexOf(rawList[i].type) >= 0) QAList.push(i);
 	}
 
 	//content filtering, optional
@@ -107,7 +107,7 @@ function qualification() {
 		var tmpList = QAList;
 		QAList = [];
 		for (var i in tmpList) {
-			if (rawList[tmpList[i]].content.search($("#text_filter_content").val()) >= 0) QAList.push(tmpList[i]);
+			if (rawList[tmpList[i]].content.indexOf($("#text_filter_content").val()) >= 0) QAList.push(tmpList[i]);
 		}
 	}
 
