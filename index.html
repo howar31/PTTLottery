@@ -4,7 +4,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>PTT推文抽獎</title>
+	<title>PTT推樂透</title>
 
 	<link href="bootstrap.min.css" rel="stylesheet">
 	<link href="index.css" rel="stylesheet">
@@ -30,7 +30,15 @@
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="">首頁</a></li>
-				<li><a href="https://github.com/howar31/PTTLottery" target="_blank">關於本網頁</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">關於 <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="https://github.com/howar31/PTTLottery" target="_blank">關於PTT推樂透</a></li>
+						<li><a href="http://about.me/howar31" target="_blank">關於作者</a></li>
+						<li class="divider"></li>
+						<li><a href="" target="_blank">PTT發佈文章</a></li>
+					</ul>
+				</li>
 			</ul>
 		</div><!--/.nav-collapse -->
 	</div>
@@ -148,6 +156,10 @@
 	</div>
 	</div><!-- #data-result -->
 
+	<div id="footer">
+		<p id="footer-1">Created and maintained by <a href="http://about.me/howar31" target="_blank">Howar31</a> @ 2014.06.12</p>
+		<p id="footer-2">This project is hosted on <a href="https://github.com/howar31/PTTLottery" target="_blank">GitHub</a>.  Any bug report or suggestion is welcome.</p>
+	</div><!-- #footer -->
 </div><!-- /.container -->
 
 <script>

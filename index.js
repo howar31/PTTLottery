@@ -211,23 +211,26 @@ function showinfo(info, type) {
 }
 
 function lockdown(lock) {
-	if (lock) {
-		$(".chk_pushtype").attr("disabled", true);
-		$("#pushimport").attr("disabled", true);
-		$("#pushurl").attr("disabled", true);
-		$("#pushcontent").attr("disabled", true);
-		$("#chk_filter_content").attr("disabled", true);
-		$("#chk_filter_date").attr("disabled", true);
-		$("#chk_filter_id").attr("disabled", true);
-	} else {
-		$(".chk_pushtype").removeAttr("disabled");
-		$("#pushimport").removeAttr("disabled");
-		$("#pushurl").removeAttr("disabled");
-		$("#pushcontent").removeAttr("disabled");
-		$("#chk_filter_content").removeAttr("disabled");
-		$("#chk_filter_date").removeAttr("disabled");
-		$("#chk_filter_id").removeAttr("disabled");
-	}
+	$(".chk_pushtype").prop("disabled", lock);
+	$("#pushimport").prop("disabled", lock);
+	$("#pushurl").prop("disabled", lock);
+	$("#pushcontent").prop("disabled", lock);
+
+	$("#chk_filter_content").prop("disabled", lock);
+	$("#text_filter_content").prop("disabled", lock);
+
+	$("#chk_filter_date").prop("disabled", lock);
+	$("#sel_filter_start_date_m").prop("disabled", lock);
+	$("#sel_filter_start_date_d").prop("disabled", lock);
+	$("#sel_filter_start_time_h").prop("disabled", lock);
+	$("#sel_filter_start_time_m").prop("disabled", lock);
+	$("#sel_filter_end_date_m").prop("disabled", lock);
+	$("#sel_filter_end_date_d").prop("disabled", lock);
+	$("#sel_filter_end_time_h").prop("disabled", lock);
+	$("#sel_filter_end_time_m").prop("disabled", lock);
+
+	$("#chk_filter_id").prop("disabled", lock);
+	$("#text_filter_id").prop("disabled", lock);
 }
 
 function setOptions(sel, min, max) {

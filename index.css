@@ -65,3 +65,10 @@ blockquote {
 	border-radius: 4px;
 	padding: 0px 10px;
 }
+
+#footer {
+	color: #CCCCCC;
+	padding-top: 9px;
+	margin: 20px 0 40px;
+	border-top: 1px solid #EEE;
+}
