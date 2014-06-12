@@ -62,7 +62,7 @@
 	</blockquote>
 	<!-- 推文日期過濾 -->
 	<div class="checkbox">
-		<label><input type="checkbox" class="filter instantupdate" id="chk_filter_date">過濾推文日期</label>
+		<label><input type="checkbox" class="filter instantupdate" id="chk_filter_date">過濾推文時間</label>
 	</div>
 	<blockquote class="filter_block">
 	<div class="row">
@@ -70,29 +70,25 @@
 		<div class="col-sm-1">月</div>
 		<div class="col-sm-1"><select class="form-control input-sm filter_sub instantupdate" id="sel_filter_start_date_d" disabled></select></div>
 		<div class="col-sm-1">日</div>
-		<div class="col-sm-1">～</div>
-		<div class="col-sm-1"><select class="form-control input-sm filter_sub instantupdate" id="sel_filter_end_date_m" disabled></select></div>
-		<div class="col-sm-1">月</div>
-		<div class="col-sm-1"><select class="form-control input-sm filter_sub instantupdate" id="sel_filter_end_date_d" disabled></select></div>
-		<div class="col-sm-1">日</div>
-	</div>
-	</blockquote>
-	<!-- 推文時間過濾 -->
-	<div class="checkbox">
-		<label><input type="checkbox" class="filter instantupdate" id="chk_filter_time">過濾推文時間</label>
-	</div>
-	<blockquote class="filter_block">
-	<div class="row">
 		<div class="col-sm-1"><select class="form-control input-sm filter_sub instantupdate" id="sel_filter_start_time_h" disabled></select></div>
 		<div class="col-sm-1">時</div>
 		<div class="col-sm-1"><select class="form-control input-sm filter_sub instantupdate" id="sel_filter_start_time_m" disabled></select></div>
 		<div class="col-sm-1">分</div>
+	</div>
+	<div class="row">
 		<div class="col-sm-1">～</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-1"><select class="form-control input-sm filter_sub instantupdate" id="sel_filter_end_date_m" disabled></select></div>
+		<div class="col-sm-1">月</div>
+		<div class="col-sm-1"><select class="form-control input-sm filter_sub instantupdate" id="sel_filter_end_date_d" disabled></select></div>
+		<div class="col-sm-1">日</div>
 		<div class="col-sm-1"><select class="form-control input-sm filter_sub instantupdate" id="sel_filter_end_time_h" disabled></select></div>
 		<div class="col-sm-1">時</div>
 		<div class="col-sm-1"><select class="form-control input-sm filter_sub instantupdate" id="sel_filter_end_time_m" disabled></select></div>
 		<div class="col-sm-1">分</div>
 	</div>
+	<span class="help-block">設定時間範圍，不分前後，前後設定起點或終點都可以，推文時間落在範圍內即可，但無法跨年計算</span>
 	</blockquote>
 	<!-- 推文ID過濾 -->
 	<div class="checkbox">

@@ -22,6 +22,27 @@ function timeCompare (Aa, Ab, Ba, Bb) {
 	}
 }
 
+function timeWithin (SAa, SAb, SAc, SAd, Ta, Tb, Tc, Td, SBa, SBb, SBc, SBd) {
+	//if (SA <= T <= SB) or (SA >= T >= SB) return 1 else 0
+	var xd = timeCompare(SAa, SAb, SBa, SBb);
+	var xt = timeCompare(SAc, SAd, SBc, SBd);
+	if ((xd == 1) || (xd == 0 && xt == 1)) {
+		var Xa = SAa; SAa = SBa; SBa = Xa;
+		var Xb = SAb; SAb = SBb; SBb = Xb;
+		var Xc = SAc; SAc = SBc; SBc = Xc;
+		var Xd = SAd; SAd = SBd; SBd = Xd;
+	}
+	var Ad = timeCompare(SAa, SAb, Ta, Tb);
+	var Bd = timeCompare(Ta, Tb, SBa, SBb);
+	var At = timeCompare(SAc, SAd, Tc, Td);
+	var Bt = timeCompare(Tc, Td, SBc, SBd);
+	if ((Ad == 1 || (Ad == 0 && At == 1)) || (Bd == 1 || (Bd == 0 && Bt ==1))) {
+		return 0;
+	} else {
+		return 1;
+	}
+}
+
 function unique(list) {
 	var result = [];
 	$.each(list, function(i, e) {
@@ -92,14 +113,21 @@ function qualification() {
 
 	//date filtering, optional
 	if ($("#chk_filter_date").prop("checked")) {
-	}
-
-	//time filtering, optional
-	if ($("#chk_filter_time").prop("checked")) {
+		var tmpList = QAList;
+		QAList = [];
+		for (var i in tmpList) {
+			var pd = rawList[tmpList[i]].date.split("/");
+			var pt = rawList[tmpList[i]].time.split(":");
+			if (timeWithin($("#sel_filter_start_date_m").val(), $("#sel_filter_start_date_d").val(), $("#sel_filter_start_time_h").val(), $("#sel_filter_start_time_m").val(), pd[0], pd[1], pt[0], pt[1], $("#sel_filter_end_date_m").val(), $("#sel_filter_end_date_d").val(), $("#sel_filter_end_time_h").val(), $("#sel_filter_end_time_m").val())) QAList.push(tmpList[i]);
+		}
 	}
 
 	//id filitering, optional
 	if ($("#chk_filter_id").prop("checked")) {
+		var tmpList = QAList;
+		QAList = [];
+		for (var i in tmpList) {
+		}
 	}
 
 	//process all qualified ID
@@ -188,7 +216,6 @@ function lockdown(lock) {
 		$("#pushcontent").attr("disabled", true);
 		$("#chk_filter_content").attr("disabled", true);
 		$("#chk_filter_date").attr("disabled", true);
-		$("#chk_filter_time").attr("disabled", true);
 		$("#chk_filter_id").attr("disabled", true);
 	} else {
 		$(".chk_pushtype").removeAttr("disabled");
@@ -197,7 +224,6 @@ function lockdown(lock) {
 		$("#pushcontent").removeAttr("disabled");
 		$("#chk_filter_content").removeAttr("disabled");
 		$("#chk_filter_date").removeAttr("disabled");
-		$("#chk_filter_time").removeAttr("disabled");
 		$("#chk_filter_id").removeAttr("disabled");
 	}
 }
