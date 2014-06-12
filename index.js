@@ -307,7 +307,7 @@ $( document ).ready(function() {
 		var tmpWin = -1;
 		var winnum = ($("#chk_winnum").prop("checked"))?$("#sel_winnum").val():1;
 		for (var i = 1; i <= winnum; i++) {
-			while ($.inArray(tmpWin = randomFloor(0, winnum - 1), winner) > -1);
+			while ($.inArray(tmpWin = randomFloor(0, QAID.length - 1), winner) > -1);
 			winner.push(tmpWin);
 		}
 
