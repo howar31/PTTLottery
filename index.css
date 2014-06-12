@@ -66,6 +66,14 @@ blockquote {
 	padding: 0px 10px;
 }
 
+#data-result {
+	display: none;
+}
+
+#result div {
+	font-weight: bold;
+}
+
 #footer {
 	color: #CCCCCC;
 	padding-top: 9px;

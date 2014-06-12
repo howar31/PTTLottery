@@ -53,7 +53,7 @@ function unique(list) {
 
 function parseContent() {
 	var rst;
-	var content = document.getElementById("pushcontent").value;
+	var content = $("#pushcontent").val();
 
 	//parse Analytics
 	var regex = new RegExp("([推→噓]) ([A-Za-z0-9]+)[\\s]*:(.*)[\\s]+([0-9]+/[0-9]+)[\\s]+([0-9]+:[0-9]+)", "g");
@@ -82,10 +82,10 @@ function parseContent() {
 			"<div class=\"col-md-1\">" + rawList[i].date + "</div>" +
 			"<div class=\"col-md-1\">" + rawList[i].time + "</div>";
 	}
-	document.getElementById("sum_push_list_insert").innerHTML = tmpString;
+	$("#sum_push_list_insert").html(tmpString);
 
 	//update push count
-	document.getElementById("pushCount").innerHTML = rawList.length;
+	$("#pushCount").html(rawList.length);
 
 	//parse qualified
 	qualification();
@@ -138,36 +138,15 @@ function qualification() {
 	}
 	//update ID count
 	QAID = unique(QAID);
-	document.getElementById("idCount").innerHTML = QAID.length;
+	$("#idCount").html(QAID.length);
 
 	//update ID List
 	var tmpString = "";
 	for (var i in QAID) {
 		tmpString += "<div class=\"col-xs-3\">" + QAID[i] + "</div>";
 	}
-	document.getElementById("sum_id_list").innerHTML = tmpString;
-}
-
-function roll() {
-	document.getElementById("result").innerHTML = "";
-	if(!document.getElementById("nocheat").checked) {
-		showinfo("不要作弊啦QAQ","danger");
-		return;
-	}
-	if(QAID.length==0) {
-		showinfo("沒有半個人想抽哭哭","warning");
-		return;
-	}
-
-	//lockdown the roll button
-	$("#nocheat").attr("disabled", true);
-	$("#pushroll").attr("disabled", true);
-
-	//get a random winner
-	var winner = QAID[randomFloor(0, QAID.length-1)];
-	var congrats = "恭喜 <b>" + winner + " </b>獲得大獎！"
-	document.getElementById("result").innerHTML = congrats;
-	showinfo("開獎啦！","success");
+	$("#sum_id_list").html(tmpString);
+	setOptions("#sel_winnum", 1, QAID.length);
 }
 
 function webimport(url) {
@@ -231,6 +210,9 @@ function lockdown(lock) {
 
 	$("#chk_filter_id").prop("disabled", lock);
 	$("#text_filter_id").prop("disabled", lock);
+
+	$("#chk_winnum").prop("disabled", !lock);
+	$("#sel_winnum").prop("disabled", !lock);
 }
 
 function setOptions(sel, min, max) {
@@ -304,15 +286,45 @@ $( document ).ready(function() {
 	});
 	//rock n roll!
 	$( document ).on("click", "#pushroll", function() {
-		roll();
+		$("#result").html("");
+		//initial check
+		if (!$("#nocheat").prop("checked")) {
+			showinfo("不要作弊啦QAQ","danger");
+			return;
+		}
+		if(QAID.length==0) {
+			showinfo("沒有半個人想抽哭哭","warning");
+			return;
+		}
+
+		//lockdown the roll button
+		$("#nocheat").prop("disabled", true);
+		$("#chk_winnum").prop("disabled", true);
+		$("#sel_winnum").prop("disabled", true);
+		$("#pushroll").prop("disabled", true);
+
+		var winner = [];
+		var tmpWin = -1;
+		var winnum = ($("#chk_winnum").prop("checked"))?$("#sel_winnum").val():1;
+		for (var i = 1; i <= winnum; i++) {
+			while ($.inArray(tmpWin = randomFloor(0, winnum - 1), winner) > -1);
+			winner.push(tmpWin);
+		}
+
+		var tmpString = "";
+		for (var i in winner) {
+			tmpString += "<div class=\"col-xs-3\">" + QAID[winner[i]] + "</div>";
+		}
+
+		//get a random winner
+		$("#resultnum").html(parseInt(winnum)+"位");
+		$("#result").html(tmpString);
+		$("#data-result").toggle("fast", "linear");
+		showinfo("開獎啦！","success");
 	});
 	//toggle sub-settings
 	$( document ).on("click", ".filter", function() {
 		$(this).parent("label").parent(".checkbox").next(".filter_block").toggle("fast", "linear");
-		if (this.checked) {
-			$(this).parent("label").parent(".checkbox").next(".filter_block").find(".filter_sub").removeAttr("disabled");
-		} else {
-			$(this).parent("label").parent(".checkbox").next(".filter_block").find(".filter_sub").attr("disabled", true);
-		}
+		$(this).parent("label").parent(".checkbox").next(".filter_block").find(".filter_sub").prop("disabled", !this.checked);
 	});
 });

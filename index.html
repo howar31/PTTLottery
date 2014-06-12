@@ -143,16 +143,34 @@
 	</div>
 	</div><!-- #data-input -->
 
-	<div class="row-block" id="data-result">
+	<div class="row-block" id="data-roll">
 	<!-- 確認 -->
 	<div class="checkbox"><label><input type="checkbox" id="nocheat" title="確認資料設定都完成，點選此鎖定資料並同意條約">本人承諾開獎過程中絕無任何作弊行為，一切正常使用本程式公平公正開獎。</label></div>
+	<!-- 多重開獎 -->
+	<div class="checkbox">
+		<label><input type="checkbox" class="filter instantupdate" id="chk_winnum" disabled>多重開獎</label>
+	</div>
+	<blockquote class="filter_block">
+	<div class="row">
+		<div class="col-sm-2"><select class="form-control input-sm filter_sub" id="sel_winnum" disabled></select></div>
+		<div class="col-sm-2">個獎項</div>
+	</div>
+	<span class="help-block">此選項可一次開出多位得獎者</span>
+	</blockquote>
+	<!-- 開獎 -->
 	<div class="row">
 		<div class="col-sm-2"><button type="button" class="btn btn-primary" id="pushroll">開獎！</button></div>
 		<div class="col-sm-10"><div id="pushinfo"></div></div>
 	</div>
+	</div><!-- #data-roll-->
 
+	<div class="row-block" id="data-result">
+	<!-- 結果 -->
 	<div class="row">
-		<div class="col-sm-12"><span id="result"></div>
+		<div class="col-sm-12">恭喜以下<span id="resultnum"></span>鄉民獲得大獎！</div>
+	</div>
+	<div class="row">
+		<span id="result"></span>
 	</div>
 	</div><!-- #data-result -->
 
