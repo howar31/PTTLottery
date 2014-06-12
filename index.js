@@ -126,7 +126,9 @@ function qualification() {
 	if ($("#chk_filter_id").prop("checked")) {
 		var tmpList = QAList;
 		QAList = [];
+		var bl = $("#text_filter_id").val().trim().replace(/[\s,]+/g, ",").split(",");
 		for (var i in tmpList) {
+			if ($.inArray(rawList[tmpList[i]].id, bl) == -1) QAList.push(tmpList[i]);
 		}
 	}
 
