@@ -150,6 +150,7 @@ function qualification() {
 }
 
 function webimport(url) {
+	showinfo("注意！YQL元件官方更動目前出現問題！匯入功能失效，正在改善中！請先改用手動貼上，造成不便請見諒！", "warning");
 	$.ajax({
 		url: url, 
 		type: "GET",
