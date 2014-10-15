@@ -136,6 +136,13 @@ function qualification() {
 	for (var i in QAList) {
 		QAID.push(rawList[QAList[i]].id);
 	}
+	//add labar ID, optional
+	var labarval = $("#text_filter_labar").val().trim().replace(/[\n]+/g,"\n").split("\n");
+	if ($("#chk_filter_labar").prop("checked") && labarval != "") {
+		for (var i in labarval) {
+			QAID.push(labarval[i]);
+		}
+	}
 	//update ID count
 	QAID = unique(QAID);
 	$("#idCount").html(QAID.length);
@@ -198,6 +205,8 @@ function lockdown(lock) {
 
 	$("#chk_filter_content").prop("disabled", lock);
 	$("#text_filter_content").prop("disabled", lock);
+	$("#chk_filter_labar").prop("disabled", lock);
+	$("#text_filter_labar").prop("disabled", lock);
 
 	$("#chk_filter_date").prop("disabled", lock);
 	$("#sel_filter_start_date_m").prop("disabled", lock);

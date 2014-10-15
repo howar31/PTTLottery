@@ -42,6 +42,12 @@ blockquote {
 	min-height: 112px;
 }
 
+#text_filter_labar {
+	min-width: 100%;
+	max-width: 100%;
+	min-height: 72px;
+}
+
 .sum_title {
 	cursor: pointer;
 }

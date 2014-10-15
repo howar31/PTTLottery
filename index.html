@@ -33,8 +33,8 @@
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Steam群組 <b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><a href="http://steamcommunity.com/groups/pttcc" target="_blank" title="PTT Steam板 官方Steam群組">群組頁面</a></li>
-						<li><a href="steam://friends/joinchat/103582791435694737" title="必需先加入群組才能進入聊天室">群組聊天室</a></li>
+						<li><a href="http://steamcommunity.com/groups/pttcc" target="_blank" title="PTT Steam板 官方Steam群組">PTT群組頁面</a></li>
+						<li><a href="steam://friends/joinchat/103582791435694737" title="必需先加入群組才能進入聊天室">PTT群組聊天室</a></li>
 					</ul>
 				</li>
 				<li class="dropdown">
@@ -115,12 +115,24 @@
 		<input type="text" class="form-control filter_sub instantupdate" id="text_filter_id" title="要「排除」在名單之外的ID，以「,」或「 」分隔" placeholder="請輸入要「排除」在名單之外的ID，以「,」(逗點)或「 」(空格)分隔" disabled>
 	</div>
 	</blockquote>
+	<!-- 手動新增名單 -->
+	<div class="checkbox">
+		<label><input type="checkbox" class="filter instantupdate" id="chk_filter_labar">手動拉霸</label>
+	</div>
+	<blockquote class="filter_block">
+	<div class="form-group">
+		<label class="sr-only" for="text_filter_labar">手動新增名單</label>
+		<textarea class="form-control instantupdate" id="text_filter_labar" placeholder="手動輸入新增抽獎名單"></textarea>
+<!--		<input type="text" class="form-control filter_sub instantupdate" id="text_filter_labar" placeholder="手動輸入新增抽獎名單" disabled>-->
+	</div>
+	</blockquote>
+
 	</div><!-- #data-filter -->
 
 	<div class="row-block" id="data-input">
 	<div class="row">
 		<div class="col-sm-2"><button type="button" class="btn btn-primary" id="pushimport">匯入網頁</button></div>
-		<div class="col-sm-10"><input type="text" class="form-control" id="pushurl" placeholder="請輸入PTT文章網址，自動匯入推文內容"/></div>
+		<div class="col-sm-10"><input type="text" class="form-control" id="pushurl" placeholder="請輸入PTT文章網址，自動匯入推文內容 (Yahoo的套件怪怪的，有時候匯入如果是空的則是套件失敗，請改用手動複製貼上，感謝orz)"/></div>
 	</div>
 	<div class="row">
 		<div class="col-sm-12"><textarea class="form-control instantupdate" id="pushcontent" placeholder="或手動貼上PTT推文內容"></textarea></div>
